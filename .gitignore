@@ -10,6 +10,9 @@
 # Ignore all environment files.
 /.env*
 
+# Ignore VSCode files.
+/.vscode
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
