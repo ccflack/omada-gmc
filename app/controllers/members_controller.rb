@@ -65,6 +65,6 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:id, :first_name, :last_name, :email)
+      params.expect(member: [ :id, :first_name, :last_name, :email ])
     end
 end

@@ -49,6 +49,7 @@ class LevelsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def level_params
-      params.require(:level).permit(:value, :tested_at, :tz_offset, :member_id)
+      params.expect(level: [ :member_id, :level_type, :value, :unit, :tested_at, :tz_offset ])
+            .with_defaults({ level_type: "continuous_glucose_monitoring", unit: "mg/dL" })
     end
 end
