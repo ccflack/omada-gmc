@@ -17,7 +17,12 @@ class LevelsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create level" do
     assert_difference("Level.count") do
-      post levels_url, params: { level: {} }
+      post levels_url, params: { level: {
+        member_id: members(:one).id,
+        value: 120,
+        tested_at: DateTime.now,
+        tz_offset: "-04:00"
+      } }
     end
 
     assert_redirected_to level_url(Level.last)
@@ -26,16 +31,6 @@ class LevelsControllerTest < ActionDispatch::IntegrationTest
   test "should show level" do
     get level_url(@level)
     assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_level_url(@level)
-    assert_response :success
-  end
-
-  test "should update level" do
-    patch level_url(@level), params: { level: {} }
-    assert_redirected_to level_url(@level)
   end
 
   test "should destroy level" do

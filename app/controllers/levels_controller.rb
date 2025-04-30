@@ -1,5 +1,5 @@
 class LevelsController < ApplicationController
-  before_action :set_level, only: %i[ show edit update destroy ]
+  before_action :set_level, only: %i[ show destroy ]
 
   # GET /levels or /levels.json
   def index
@@ -13,10 +13,6 @@ class LevelsController < ApplicationController
   # GET /levels/new
   def new
     @level = Level.new
-  end
-
-  # GET /levels/1/edit
-  def edit
   end
 
   # POST /levels or /levels.json
@@ -34,18 +30,6 @@ class LevelsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /levels/1 or /levels/1.json
-  def update
-    respond_to do |format|
-      if @level.update(level_params)
-        format.html { redirect_to @level, notice: "Level was successfully updated." }
-        format.json { render :show, status: :ok, location: @level }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @level.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /levels/1 or /levels/1.json
   def destroy
@@ -65,6 +49,6 @@ class LevelsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def level_params
-      params.fetch(:level, {})
+      params.require(:level).permit(:value, :tested_at, :tz_offset, :member_id)
     end
 end

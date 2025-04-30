@@ -4,8 +4,10 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  member_id: 1
+  level_type: "continuous_glucose_monitoring"
+  value: 162
+  tested_at: "2023-10-01T00:00:00Z"
+  tz_offset: "-4:00"
+  unit: "mg/dL"
