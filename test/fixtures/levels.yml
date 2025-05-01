@@ -51,3 +51,11 @@ oldest_one:
   tested_at: <%= 2.months.ago %>
   tz_offset: "-4:00"
   unit: "mg/dL"
+
+other_member_level:
+  member_id: 2
+  level_type: "continuous_glucose_monitoring"
+  value: 150
+  tested_at: <%= 1.day.ago %>
+  tz_offset: "-4:00"
+  unit: "mg/dL"
