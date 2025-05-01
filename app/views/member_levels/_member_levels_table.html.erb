@@ -1,0 +1,32 @@
+<%= turbo_frame_tag "member_dash_table" do %>
+  <h1 class="text-2xl font-bold mb-4">Member levels (<%= @level_type.titleize %>)</h1>
+
+  <div id="levels" class="min-w-full divide-y divide-gray-200 space-y-5">
+    <table class="table-auto w-full border-collapse border border-gray-200">
+      <thead>
+        <tr>
+          <th class="border border-gray-300 px-4 py-2 text-left">Average Reading</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Time Above Range</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Time Below Range</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Change Since Last Period</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border border-gray-300 px-4 py-2">
+            <%= data[:average] %> <%= data[:unit] %>
+          </td>
+          <td class="border border-gray-300 px-4 py-2">
+            <%= number_to_percentage(data[:time_above_threshold_percentage], precision: 2) %>
+          </td>
+          <td class="border border-gray-300 px-4 py-2">
+            <%= number_to_percentage(data[:time_below_threshold_percentage], precision: 2) %>
+          </td>
+          <td class="border border-gray-300 px-4 py-2">
+            <%= number_to_percentage(data[:change_from_prior_period_percentage], precision: 2) %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>

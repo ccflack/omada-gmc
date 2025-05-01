@@ -35,10 +35,13 @@ CSV.foreach(csv_file_path, headers: true) do |row|
   tested_at_string = [ row['tested_at'], tz_offset_string ].join(' ')
   tested_at_dt = DateTime.strptime(tested_at_string, '%m/%d/%y %k:%M %:z')
 
-  p tested_at_dt
+  # Advance dates to make filtering by 7 days / 30 days more realistic in the code.
+  # Rather than try to manipulate thigns at runtime, this seesm like the least invasive
+  # way to get "realistic" data into the database, which the requested filters will pick up.
+  tested_at_dt_advanced = tested_at_dt + 1.year + 1.month
 
   row_parsed = {
-    tested_at: tested_at_dt,
+    tested_at: tested_at_dt_advanced,
     value: row[1].to_i
   }
 

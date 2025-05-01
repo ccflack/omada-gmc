@@ -1,2 +1,32 @@
 <div id="<%= dom_id member %>" class="w-full sm:w-auto my-5 space-y-5">
+  <table class="table-auto w-full border-collapse border border-gray-200">
+    <thead>
+      <tr>
+        <th class="border border-gray-300 px-4 py-2 text-left">Full Name</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Levels</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 px-4 py-2"><%= member.full_name %></td>
+        <td class="border border-gray-300 px-4 py-2"><%= member.email %></td>
+        <td class="border border-gray-300 px-4 py-2">
+          <ul>
+            <% Level.level_types.each do |type| %>
+              <% if member.levels_for(type: type).any? %>
+                <li>
+                  <%= link_to type.titleize,
+                      member_levels_path(member_id: member.id, level_type: type),
+                      class: "text-blue-500 hover:underline" %>
+                </li>
+              <% else %>
+                <span class="text-gray-500">No levels</span>
+              <% end %>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
