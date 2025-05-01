@@ -25,18 +25,13 @@ class MemberDashboard
       average = scoped_levels.average(:value).round(2)
       time_above_threshold_percentage = scoped_levels.above_threshold(180).count / scoped_levels.count.to_f * 100
       time_below_threshold_percentage = scoped_levels.below_threshold(70).count / scoped_levels.count.to_f * 100
-      time_in_range_percentage = scoped_levels.in_range(70, 180).count / scoped_levels.count.to_f * 100
       change_from_prior_period_percentage = calculate_change_from_prior_period(scoped_levels: scoped_levels, date_scope: date_scope)
 
       {
-        member: @member,
-        level_type: @level_type,
         unit:,
-        date_scope:,
         average:,
         time_above_threshold_percentage:,
         time_below_threshold_percentage:,
-        time_in_range_percentage:,
         change_from_prior_period_percentage:
       }
     end
