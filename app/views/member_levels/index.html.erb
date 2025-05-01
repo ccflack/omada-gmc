@@ -1,0 +1,26 @@
+<% content_for :title, "Dashboard" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Member Dashboard</h1>
+  </div>
+
+  <div class="flex space-x-4 mb-5">
+    <%= link_to "Last 7 Days", member_levels_table_data_path(member_id: @member.id, level_type: @level_type, date_scope: "last_7_days"),
+                data: { turbo_frame: "member_dash_table" },
+                class: "py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" %>
+    <%= link_to "Month to Date", member_levels_table_data_path(member_id: @member.id, level_type: @level_type, date_scope: "month_to_date"),
+                  data: { turbo_frame: "member_dash_table" },
+                  class: "py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" %>
+  </div>
+
+  <%= turbo_frame_tag "member_dash_table", src: member_levels_table_data_path(member_id: @member.id, level_type: @level_type, date_scope: "month_to_date") %>
+
+  <div class="flex justify-end">
+    <%= link_to "Back to members", members_path, class: "py-2 px-4 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200" %>
+  </div>
+</div>

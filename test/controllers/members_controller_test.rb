@@ -10,11 +10,6 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_member_url
-    assert_response :success
-  end
-
   test "should create member" do
     assert_difference("Member.count") do
       post members_url, params: { member: {

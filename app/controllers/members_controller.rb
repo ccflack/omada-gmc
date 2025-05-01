@@ -10,11 +10,6 @@ class MembersController < ApplicationController
   def show
   end
 
-  # GET /members/new
-  def new
-    @member = Member.new
-  end
-
   # GET /members/1/edit
   def edit
   end
