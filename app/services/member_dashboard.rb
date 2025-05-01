@@ -1,6 +1,5 @@
 class MemberDashboard
   attr_accessor :member, :level_type
-  attr_reader :dashboard_data
 
   UNIT_LOOKUP = {
     continuous_glucose_monitoring: "mg/dL"
