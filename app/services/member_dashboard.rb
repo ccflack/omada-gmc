@@ -18,7 +18,7 @@ class MemberDashboard
   end
 
   def data(date_scope:)
-    Rails.cache.fetch(cache_key, expires_in: time_until_end_of_day) do
+    Rails.cache.fetch(cache_key(date_scope), expires_in: time_until_end_of_day) do
       scoped_levels = @member.scoped_levels_for(level_type: @level_type, date_scope: date_scope)
       return {} if scoped_levels.blank?
 
@@ -44,8 +44,8 @@ class MemberDashboard
 
   private
 
-  def cache_key
-    "member_dashboard/#{@member.id}/#{@level_type}"
+  def cache_key(date_scope)
+    "member_dashboard/#{@member.id}/#{@level_type}/#{date_scope}"
   end
 
   def time_until_end_of_day

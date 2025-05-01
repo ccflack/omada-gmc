@@ -41,3 +41,7 @@ Things you may want to cover:
 
 - Implement Rails caching on MemberDashboard results, keyed on member.id and level.level_type. Expire the cache at the beginning of each day. (keyed instead on `date_scope`, so:)
 - Rather than date_scope as a cache_key, key the cache on member.id and level_type
+
+Upon review, all 3 are appropriate:
+
+- Include the date_scope in the cache_key
