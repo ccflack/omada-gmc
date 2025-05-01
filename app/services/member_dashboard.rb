@@ -18,29 +18,39 @@ class MemberDashboard
   end
 
   def data(date_scope:)
-    scoped_levels = @member.scoped_levels_for(level_type: @level_type, date_scope: date_scope)
-    return {} if scoped_levels.blank?
+    Rails.cache.fetch(cache_key, expires_in: time_until_end_of_day) do
+      scoped_levels = @member.scoped_levels_for(level_type: @level_type, date_scope: date_scope)
+      return {} if scoped_levels.blank?
 
-    average = scoped_levels.average(:value).round(2)
-    time_above_threshold_percentage = scoped_levels.above_threshold(180).count / scoped_levels.count.to_f * 100
-    time_below_threshold_percentage = scoped_levels.below_threshold(70).count / scoped_levels.count.to_f * 100
-    time_in_range_percentage = scoped_levels.in_range(70, 180).count / scoped_levels.count.to_f * 100
-    change_from_prior_period_percentage = calculate_change_from_prior_period(scoped_levels: scoped_levels, date_scope: date_scope)
+      average = scoped_levels.average(:value).round(2)
+      time_above_threshold_percentage = scoped_levels.above_threshold(180).count / scoped_levels.count.to_f * 100
+      time_below_threshold_percentage = scoped_levels.below_threshold(70).count / scoped_levels.count.to_f * 100
+      time_in_range_percentage = scoped_levels.in_range(70, 180).count / scoped_levels.count.to_f * 100
+      change_from_prior_period_percentage = calculate_change_from_prior_period(scoped_levels: scoped_levels, date_scope: date_scope)
 
-    {
-      member: @member,
-      level_type: @level_type,
-      unit:,
-      date_scope:,
-      average:,
-      time_above_threshold_percentage:,
-      time_below_threshold_percentage:,
-      time_in_range_percentage:,
-      change_from_prior_period_percentage:
-    }
+      {
+        member: @member,
+        level_type: @level_type,
+        unit:,
+        date_scope:,
+        average:,
+        time_above_threshold_percentage:,
+        time_below_threshold_percentage:,
+        time_in_range_percentage:,
+        change_from_prior_period_percentage:
+      }
+    end
   end
 
   private
+
+  def cache_key
+    "member_dashboard/#{@member.id}/#{@level_type}"
+  end
+
+  def time_until_end_of_day
+    (Time.current.end_of_day - Time.current).to_i
+  end
 
   def calculate_change_from_prior_period(scoped_levels:, date_scope:)
     case date_scope

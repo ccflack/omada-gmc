@@ -37,3 +37,7 @@ Things you may want to cover:
 - Because we're usng beginning_of_day and end_of_day in the scope, the tested dates on line 19 are not returning an empty array, and the test fails. Adjust the tested date range only, do not apply beginning_of_day or end_of_day within the test file.
 - Update the API controller and the test to also scope the returned levels by member. If new fixtures need to be created to test this new functionality, do so.
 
+#### Caching
+
+- Implement Rails caching on MemberDashboard results, keyed on member.id and level.level_type. Expire the cache at the beginning of each day. (keyed instead on `date_scope`, so:)
+- Rather than date_scope as a cache_key, key the cache on member.id and level_type
