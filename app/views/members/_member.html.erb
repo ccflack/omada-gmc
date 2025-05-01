@@ -14,7 +14,7 @@
         <td class="border border-gray-300 px-4 py-2">
           <ul>
             <% Level.level_types.each do |type| %>
-              <% if member.levels_for(type: type).any? %>
+              <% if member.levels_for(level_type: type).any? %>
                 <li>
                   <%= link_to type.titleize,
                       member_levels_path(member_id: member.id, level_type: type),

@@ -18,7 +18,7 @@ class MemberTest < ActiveSupport::TestCase
 
   test "levels_for should filter levels by type" do
     member = members(:one)
-    levels = member.levels_for(type: "continuous_glucose_monitoring")
+    levels = member.levels_for(level_type: "continuous_glucose_monitoring")
     assert_not_empty levels
     assert levels.all? { |level| level.level_type == "continuous_glucose_monitoring" }
   end

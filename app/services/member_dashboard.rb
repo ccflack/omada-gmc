@@ -54,7 +54,7 @@ class MemberDashboard
       raise ArgumentError, "Invalid date scope"
     end
 
-    prior_period_levels = @member.levels_for(type: @level_type).from_date_range(prior_period_start, prior_period_end)
+    prior_period_levels = @member.levels_for(level_type: @level_type).from_date_range(prior_period_start, prior_period_end)
 
     return 0 if prior_period_levels.empty?
 
